@@ -1,0 +1,23 @@
+{
+  "name": "birthday-alert",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "build": "tsc",
+    "dev": "yarn build && node build/index.js",
+    "test": "vitest",
+    "coverage": "vitest run --coverage"
+  },
+  "author": "Matheus S M Mota",
+  "license": "ISC",
+  "dependencies": {
+    "node-schedule": "^2.1.1"
+  },
+  "devDependencies": {
+    "@types/node": "^22.1.0",
+    "@types/node-schedule": "^2.1.7",
+    "@vitest/coverage-v8": "^2.0.5",
+    "typescript": "^5.5.4",
+    "vitest": "^2.0.5"
+  }
+}
