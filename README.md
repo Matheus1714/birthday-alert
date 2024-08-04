@@ -1,3 +1,5 @@
+![](./.github/imgs/architecture.jpg)
+
 # Birthday Alert
 
 Este projeto tem por finalidade enviar emails de aviso de aniversários de forma automática, baseado em triggers.
