@@ -1,30 +1,55 @@
 # Birthday Alert
 
-Este é um projeto de envio de elerta via email de aniversários.
+Este projeto tem por finalidade enviar emails de aviso de aniversários de forma automática, baseado em triggers.
 
-## Escopo
+## 🏗️ Estrutura
 
-O escopo para esse projeto foi a possibilidade de receber emails de lembretes de aniversários de forma recorrente. Os métodos implementados foram:
+O projeto foi organizado da seguinte forma:
 
-- Aniversariantes no dia (TODAY)
-- Aniversariantes na semana seguinte (NEXT_WEEK)
-- Aniversariantes no mês (IN_THIS_MONTH)
+```
+.
+├── src/
+│ ├── @types
+│ ├── constans/
+│ ├── html/
+│ ├── models/
+│ ├── services/
+│ ├── utils/
+├── get-data-from-google-sheets.ts
+├── index.ts
+├── .env
+├── .gitignore
+├── package.json
+├── README.md
+├── tsconfig.json
+├── vitest.config.ts
+└── yarn.lock
+```
 
-## Tecnologias
+Nessa estrutura, há algumas pastas importantes.
 
-As tecnoligias utilizadas para esse projeto foram:
+- `src/html`: Contém os templates de email utilizados;
+- `src/models`: Contém as classes que abstraem uma pessoa com aniversário e as notificações de email; e
+- `src/services`: Contém os serviços utilizados para o projeto, como `google-api` e `nodemailer`.
 
-- Node
-  - Para criação das rotinas e de toda a lógica
-  - Foi usado node com Typescript
-- Node Schedule
-  - Pacote para criação de acionadores recorrentes
-- Nodemailer
-  - Pacote de envio de email
-- Google APIS
-  - Pacote para acesso a planilha no google sheets
-- Vitest
-  - Teste usando Vitest
+# 🔨 Funcionalidades do projeto
+
+- Notificação via email
+- Conexão com Google Sheets
+- Disparos automáticos de rotinas
+
+## ✔️ Tecnologias utilizadas
+
+As tecnologias utilizadas para esse projeto foram:
+
+- `Node`
+- `Typescript`
+- `Google API`
+- `Node Mailer`
+- `Node Schedule`
+- `Vitest`
+
+Para mais detalhes, deixo disponível o arquivo de configuração de dependências:
 
 _package.json_
 
@@ -45,13 +70,39 @@ _package.json_
 }
 ```
 
-## Template de Emails
+## Escopo
 
-Cada email tem um template. Todos os templates utilizados se encontram em `src\html`.
+O escopo para esse projeto foi a possibilidade de receber emails de lembretes de aniversários de forma recorrente. Os métodos implementados foram:
+
+- Aniversariantes no dia (TODAY)
+- Aniversariantes na semana seguinte (NEXT_WEEK)
+- Aniversariantes no mês (IN_THIS_MONTH)
 
 ## Execução do Projeto
 
-Para executar o projeto, instale as dependências e depois execute o comando:
+Antes de executar o projeto, configura as variáveis ambiente. Há um exemplo no arquivo `.env.example` com o que é necessário.
+
+```.env
+ADMIN_EMAIL='...'
+ADMIN_PASSWORD='...'
+
+GOOGLE_SHEET_ID='...'
+GOOGLE_SHEET_RANGE='...'
+
+GCP_TYPE='...'
+GCP_PROJECT_ID='...'
+GCP_PRIVATE_KEY_ID='...'
+GCP_PRIVATE_KEY='...'
+GCP_CLIENT_EMAIL='...'
+GCP_CLIENT_ID='...'
+GCP_AUTH_URI='...'
+GCP_TOKEN_URI='...'
+GCP_AUTH_PROVIDER_X509_CERT_URL='...'
+GCP_CLIENT_X509_CERT_URL='...'
+GCP_UNIVERSE_DOMAIN='...'s
+```
+
+Após as variáveis ambientes configuradas, instale as dependências e execute o projeto com:
 
 ```shell
 yarn
