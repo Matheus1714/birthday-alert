@@ -31,25 +31,43 @@ export class EmailNotification {
     return await getFileContent(filePath);
   }
 
-  async notifyBirthdaysInMonth(to: string[]) {
+  async notifyBirthdaysInMonth(
+    to: string[],
+    metadata: { name: string; day: number; age: number }[],
+    month: string
+  ) {
     const htmlContent = await this.getHTMLContent(
       htmlTemplates.NOTIFY_BEGINNIG_MONTH.file
     );
 
     if (!htmlContent) return;
 
+    const peopleHTMLList = metadata.length
+      ? metadata
+          .map(
+            (data) =>
+              `<li>${data.name} faz ${data.age} anos no dia ${data.day}</li>`
+          )
+          .join("")
+      : `<li>Nunhuma pessoa faz aniversário esse mês</li>`;
+
+    const htmlBody = htmlContent
+      ?.replace("{{month}}", month)
+      ?.replace("{{people}}", peopleHTMLList);
+
     transporter.sendMail(
       {
         ...this.mailOptions,
         to,
         subject: htmlTemplates.NOTIFY_BEGINNIG_MONTH.subject,
-        html: htmlContent,
+        html: htmlBody,
       },
       (error, info) => {
         if (error) {
           console.error("Erro:", error);
+        } else {
+          console.log("Operação finalizada - " + info.response);
         }
-        console.log("E-mail enviado: " + info.response);
       }
     );
   }
