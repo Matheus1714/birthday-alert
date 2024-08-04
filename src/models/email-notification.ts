@@ -1,12 +1,15 @@
 require("dotenv").config();
 
-import { transporter } from "../services/nodemailer";
-import { SendMailOptions } from "nodemailer";
-import fs from "node:fs";
 import path from "node:path";
 
+import { transporter } from "../services/nodemailer";
+import { SendMailOptions } from "nodemailer";
+import { getFileContent } from "../utils/get-file-content";
+
+type HtmlFile = `${string}.html`;
+
 type HtmlTemplate = {
-  [key: string]: { file: `${string}.html`; subject: string };
+  [key: string]: { file: HtmlFile; subject: string };
 };
 
 const htmlTemplates: HtmlTemplate = {
@@ -21,19 +24,11 @@ export class EmailNotification {
     from: process.env.ADMIN_EMAIL,
   };
 
-  getHTMLContent(fileHTML: string): Promise<string | null> {
-    return new Promise((resolve, reject) => {
-      const basePath = path.resolve(__dirname, "..", "..");
-      const filePath = path.join(basePath, "src", "html", fileHTML);
+  async getHTMLContent(fileHTML: HtmlFile): Promise<string | null> {
+    const basePath = path.resolve(__dirname, "..", "..");
+    const filePath = path.join(basePath, "src", "html", fileHTML);
 
-      fs.readFile(filePath, "utf8", (err, data) => {
-        if (err) {
-          reject(err);
-        } else {
-          resolve(data);
-        }
-      });
-    });
+    return await getFileContent(filePath);
   }
 
   async notifyBirthdaysInMonth(to: string[]) {
