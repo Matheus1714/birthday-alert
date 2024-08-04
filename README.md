@@ -1,4 +1,4 @@
-![](./.github/imgs/architecture.jpg)
+![](./.github/imgs/diagram.png)
 
 # Birthday Alert
 
