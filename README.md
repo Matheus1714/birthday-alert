@@ -14,6 +14,7 @@ O projeto foi organizado da seguinte forma:
 │ ├── @types
 │ ├── constans/
 │ ├── html/
+│ ├── libs/
 │ ├── models/
 │ ├── services/
 │ ├── utils/
@@ -32,7 +33,7 @@ Nessa estrutura, há algumas pastas importantes.
 
 - `src/html`: Contém os templates de email utilizados;
 - `src/models`: Contém as classes que abstraem uma pessoa com aniversário e as notificações de email; e
-- `src/services`: Contém os serviços utilizados para o projeto, como `google-api` e `nodemailer`.
+- `src/libs`: Contém os pacotes utilizados para o projeto, como `google-api` e `nodemailer`.
 
 # 🔨 Funcionalidades do projeto
 
