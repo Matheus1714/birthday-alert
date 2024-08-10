@@ -101,7 +101,7 @@ GCP_AUTH_URI='...'
 GCP_TOKEN_URI='...'
 GCP_AUTH_PROVIDER_X509_CERT_URL='...'
 GCP_CLIENT_X509_CERT_URL='...'
-GCP_UNIVERSE_DOMAIN='...'s
+GCP_UNIVERSE_DOMAIN='...'
 ```
 
 Após as variáveis ambientes configuradas, instale as dependências e execute o projeto com:
