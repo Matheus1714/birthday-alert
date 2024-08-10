@@ -1,10 +1,12 @@
+require("dotenv").config();
+
 import { Person, BirthdayCases } from "./models/person";
 import {
   BirthdayNotificationService,
   type Template,
 } from "./services/birthday-notification-service";
-import { getDataFromGoogleSheets } from "./get-data-from-google-sheets";
 import { monthsMap } from "./constants/month";
+import { DataService } from "./services/data-service";
 
 const birthdayMap: { [key in Template]: BirthdayCases } = {
   NOTIFY_BEGINNIG_MONTH: BirthdayCases.IN_THIS_MONTH,
@@ -18,7 +20,12 @@ export async function main(
     | "NOTIFY_TODAY"
     | "NOTIFY_NEXT_WEEK"
 ) {
-  const data = await getDataFromGoogleSheets();
+  const dataService = new DataService();
+  const data =
+    process.env.ENVIROMENT === "local"
+      ? await dataService.getDataFromLocalSheets()
+      : await dataService.getDataFromGoogleSheets();
+
   const today = new Date();
   const currentMonth = monthsMap[today.getMonth() + 1];
 

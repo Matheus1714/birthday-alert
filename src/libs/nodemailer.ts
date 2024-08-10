@@ -1,5 +1,6 @@
-import { createTransport } from "nodemailer";
 require("dotenv").config();
+
+import { createTransport } from "nodemailer";
 
 /**
  * Create a application with a google password

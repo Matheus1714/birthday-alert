@@ -7,6 +7,8 @@ declare global {
       GOOGLE_SHEET_ID: string;
       GOOGLE_SHEET_RANGE: string;
 
+      XLSX_PATH: string;
+
       GCP_TYPE: string;
       GCP_PROJECT_ID: string;
       GCP_PRIVATE_KEY_ID: string;
@@ -18,6 +20,8 @@ declare global {
       GCP_AUTH_PROVIDER_X509_CERT_URL: string;
       GCP_CLIENT_X509_CERT_URL: string;
       GCP_UNIVERSE_DOMAIN: string;
+
+      ENVIROMENT: "local" | "remote";
     }
   }
 }

@@ -1,5 +1,3 @@
-require("dotenv").config();
-
 import { scheduleJob } from "node-schedule";
 import { main } from "./main";
 

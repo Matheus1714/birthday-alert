@@ -63,11 +63,13 @@ export class Person {
 
     switch (birthdayCases) {
       case BirthdayCases.IN_THIS_MONTH:
+        console.log("test");
         return this.isBirthdayThisMonth(today);
       case BirthdayCases.NEXT_WEEK:
         return this.isBirthdayNextWeek(today);
       case BirthdayCases.TODAY:
       default:
+        console.log("today");
         return this.isBirthdayToday(today);
     }
   }
