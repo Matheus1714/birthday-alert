@@ -6,6 +6,8 @@ declare global {
     month: Month;
     day: number;
   };
+
+  type HtmlFile = `${string}.html`;
 }
 
 export {};

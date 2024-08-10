@@ -2,22 +2,9 @@ require("dotenv").config();
 
 import path from "node:path";
 
-import { transporter } from "../services/nodemailer";
+import { transporter } from "../libs/nodemailer";
 import { SendMailOptions } from "nodemailer";
 import { getFileContent } from "../utils/get-file-content";
-
-type HtmlFile = `${string}.html`;
-
-type HtmlTemplate = {
-  [key: string]: { file: HtmlFile; subject: string };
-};
-
-const htmlTemplates: HtmlTemplate = {
-  NOTIFY_BEGINNIG_MONTH: {
-    file: "notify-beginning-month.html",
-    subject: "Aniversariantes do Mês",
-  },
-};
 
 export class EmailNotification {
   private mailOptions: SendMailOptions = {
@@ -31,36 +18,13 @@ export class EmailNotification {
     return await getFileContent(filePath);
   }
 
-  async notifyBirthdaysInMonth(
-    to: string[],
-    metadata: { name: string; day: number; age: number }[],
-    month: string
-  ) {
-    const htmlContent = await this.getHTMLContent(
-      htmlTemplates.NOTIFY_BEGINNIG_MONTH.file
-    );
-
-    if (!htmlContent) return;
-
-    const peopleHTMLList = metadata.length
-      ? metadata
-          .map(
-            (data) =>
-              `<li>${data.name} faz ${data.age} anos no dia ${data.day}</li>`
-          )
-          .join("")
-      : `<li>Nunhuma pessoa faz aniversário esse mês</li>`;
-
-    const htmlBody = htmlContent
-      ?.replace("{{month}}", month)
-      ?.replace("{{people}}", peopleHTMLList);
-
+  sendEmailFromHtmlTemplate(to: string[], subject: string, html: string) {
     transporter.sendMail(
       {
         ...this.mailOptions,
         to,
-        subject: htmlTemplates.NOTIFY_BEGINNIG_MONTH.subject,
-        html: htmlBody,
+        subject,
+        html,
       },
       (error, info) => {
         if (error) {

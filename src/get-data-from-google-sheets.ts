@@ -1,4 +1,4 @@
-import { auth, googleSheets } from "./services/google-sheets";
+import { auth, googleSheets } from "./libs/google-sheets";
 
 export async function getDataFromGoogleSheets(): Promise<
   { name: string; birthday: Birthday }[]
@@ -22,9 +22,9 @@ export async function getDataFromGoogleSheets(): Promise<
     const year = Number(row.at(3));
 
     const isNumeric = !day || !month || !year || month < 1;
-    const inValidMonths = month ? month > 0 || month < 13 : false;
+    const isValidMonth = month ? month > 0 || month < 13 : false;
 
-    if (!isNumeric || !inValidMonths) return;
+    if (!isNumeric || !isValidMonth) return;
 
     people.push({
       name,
