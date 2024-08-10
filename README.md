@@ -40,6 +40,7 @@ Nessa estrutura, há algumas pastas importantes.
 - Notificação via email
 - Conexão com Google Sheets
 - Disparos automáticos de rotinas
+- Leitura de planilhas locais
 
 ## ✔️ Tecnologias utilizadas
 
@@ -81,6 +82,12 @@ O escopo para esse projeto foi a possibilidade de receber emails de lembretes de
 - Aniversariantes na semana seguinte (NEXT_WEEK)
 - Aniversariantes no mês (IN_THIS_MONTH)
 
+## Estrutura da planilha
+
+| Nome    | Dia | Mês | Ano  |
+| ------- | --- | --- | ---- |
+| Matheus | 16  | 10  | 1997 |
+
 ## Execução do Projeto
 
 Antes de executar o projeto, configura as variáveis ambiente. Há um exemplo no arquivo `.env.example` com o que é necessário.
@@ -91,6 +98,8 @@ ADMIN_PASSWORD='...'
 
 GOOGLE_SHEET_ID='...'
 GOOGLE_SHEET_RANGE='...'
+
+XLSX_PATH='...'
 
 GCP_TYPE='...'
 GCP_PROJECT_ID='...'
@@ -103,7 +112,13 @@ GCP_TOKEN_URI='...'
 GCP_AUTH_PROVIDER_X509_CERT_URL='...'
 GCP_CLIENT_X509_CERT_URL='...'
 GCP_UNIVERSE_DOMAIN='...'
+
+ENVIROMENT='...'
 ```
+
+A variável `ENVIROMENT` determina se o projeto irá realizar a leitura da planilha localmente ou remotamente.
+
+Se deseja executar localmente, faça `ENVIROMENT=local`, mas caso deseje acessar remotamente acesse `ENVIROMENT=remote`. Lembre-se que para obter a planilha localmente é necessário um path para o arquivo `XLSX_PATH` para para o remoto são necessárias as variáveis `GCP_*` e `GOOGLE_SHEET_*`.
 
 Após as variáveis ambientes configuradas, instale as dependências e execute o projeto com:
 
